@@ -9,6 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+
 /*const path = require("node:path");
 
 
@@ -23,58 +24,59 @@ res.render("index", { user: req.user, messages: messages })
 app.post('/', (req, res) => {
     res.json(req.body);
   });*/
-  let users = {
+  let posts = {
     1: {
       id: '1',
       username: 'Robin Wieruch',
+      message: 'Hey im robin',
     },
     2: {
       id: '2',
       username: 'Dave Davids',
+      message: 'hey im dave',
     },
   };
   
-  let messages = {
+  let comments = {
     1: {
       id: '1',
       text: 'Hello World',
-      userId: '1',
+      username: 'Tristan',
     },
     2: {
       id: '2',
       text: 'By World',
-      userId: '2',
+      username: 'Aidan',
     },
   };
 
 
-  app.get('/users', (req, res) => {
-    return res.json(Object.values(users));
+  app.get('/posts', (req, res) => {
+    return res.json(Object.values(posts));
   });
 
-  app.get('/users/:userId', (req, res) => {
-    return res.send(users[req.params.userId]);
+  app.get('/posts/:postId', (req, res) => {
+    return res.send(users[req.params.postId]);
   });
 
-
-  app.get('/messages', (req, res) => {
-    return res.send(Object.values(messages));
+  app.get('/comments', (req, res) => {
+    return res.send(Object.values(comments));
   });
   
-  app.get('/messages/:messageId', (req, res) => {
-    return res.send(messages[req.params.messageId]);
+  app.get('/comments/:username', (req, res) => {
+    return res.send(messages[req.params.commentId]);
   });
 
-  app.post('/messages', (req, res) => {
+  app.post('/comments', (req, res) => {
     const id = uuidv4();
     const message = {
       id,
       text: req.body.text,
     };
   
-    messages[id] = message;
+    comments[id] = comments;
   
-    return res.send(message);
+    return res.send(comments);
   });
 
 
